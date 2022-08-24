@@ -1,0 +1,179 @@
+#contest_nav{
+	margin:auto;
+	border:1px solid #1a5cc8;
+	height:145px;
+	width: 980px;
+}
+#contest_nav strong{
+	background:#1a5cc8;
+	width:163px;
+	text-align:center;
+	display:block;
+	float:left;	
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:17px;
+	font-weight:bold;
+	color:white;
+	line-height:1.7em;
+}
+#contest_nav a{
+	color:white;
+}
+/*滚动字幕的层*/
+#rollword{
+	width:980px;
+	margin:2px auto 0;
+	color:red;
+	font-size:14px;
+	line-height:1.2em;
+	font-weight:bold;
+}
+/*比赛信息的层，以及文字显示*/
+#content #contestinfo p{
+	font-family:Arial, Helvetica, sans-serif;
+	text-align:center;
+	margin:2px auto;
+	font-size:13px;
+}
+#content #contestinfo p.currenttime{
+	margin:20px auto;
+	color:green;
+}
+/*比赛题目列表的表格*/
+#content #conprotable{
+	text-align:center;
+	font-size:13px;
+	width:80%;
+	margin:0 auto;
+}
+#content #conprotable td{
+	height:22px;
+}
+/*解题报告的层*/
+#content #conreport{
+	background:#DDD;
+	width:70%;
+	margin: auto;
+	padding:15px;
+	font-size:12px;
+	border: 1px solid #666;
+}
+/*比赛题目提交统计的表格*/
+#content #constatb{
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold;
+	font-size:13px;
+	color:white;
+	width:70%;
+	margin:auto auto 30px;
+	background:white;
+	text-align:center;
+}
+#content #constatb a{
+	color:white;
+}
+#content #constatb th{
+	height:20px;
+	background:#1a5cc8;
+}
+#content #constatb td{
+	height:20px;
+	background:orange;
+}
+#content .penalty{
+	color:#800080;
+}
+
+/*比赛列出论坛主题的表格*/
+#content #contest_topic{
+	text-align:center;
+	font-size:13px;
+	width:100%;
+	margin:0 auto;
+	border:#1a5cc8 solid 1px;
+}
+#content #contest_topic td{
+	height:25px;
+	border:#1a5cc8 solid 1px;
+}
+#content #contest_topic .tn{
+	text-align:left;
+}
+#content #contest_topic .tn a{
+	margin-left:10px;
+	color:black;
+}
+/*以下显示主题的时候用*/
+#content #topicinfo{
+	padding:5px;
+	background:#1a5cc8;
+	color:white;
+	width:100%;;
+	font-weight:bold;
+}
+#content #topicinfo a{
+	color:white;
+}
+#content .posttb{
+	font-size:13px;
+	border:#1a5cc8 solid 1px;
+	width:100%;
+	margin:2px;
+}
+#content .posttb td{
+	word-break:break-all;
+	word-wrap;break-word;
+	padding:8px;
+}
+#content .posttb .puser{
+	width:20%;
+	text-align:center;
+	border-right:#1a5cc8 solid 1px;
+	border-bottom:#1a5cc8 solid 1px;
+}
+#content .posttb .ptime{
+	text-align:center;
+	border-top:#1a5cc8 solid 1px;
+	border-right:#1a5cc8 solid 1px;
+}
+#content .posttb .ptitle{
+	border-bottom:#1a5cc8 solid 1px;
+	border-left:#1a5cc8 solid 1px;
+	font-weight:bold;
+}
+#content .posttb .pcon{
+	height:80px;
+	border-left:#1a5cc8 solid 1px;
+	border-top:#1a5cc8 solid 1px;
+}
+#content #conposter{
+	width:100%;
+	margin:20px auto;
+	padding:0;
+}
+#content #conposter h1{
+	text-align:left;
+	font-size:15px;
+	color:white;
+	background:#1a5cc8;
+	padding:3px;
+	margin:0;
+}
+#content #conposter p{
+	margin:5px 0;
+}
+#content #conposter #pproblem{
+	width:50px;
+	margin-left:10px;
+}
+#content #conposter #ptitle{
+	width:400px;
+	margin-left:36px;
+}
+#content #conposter #pcontent{
+	display:block;
+	width:476px;
+}
+#content #conposter #psubmit{
+	margin-left:160px;
+}

@@ -1,0 +1,276 @@
+@import url(head.css) ;
+@import url(form.css) ;
+@import url(diy.css) ;
+body{
+	background-image: url("/images/background.jpg");
+	font-size:14px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+body a{
+	color:#1A5CC8;
+	text-decoration:none;
+}
+body a:hover{
+	color:orange;
+	text-decoration:underline;
+}
+.hot{
+	color:red;
+}
+#content{
+	clear:both;
+	font-size:14px;
+	margin:0 auto;
+	width:980px;
+}
+
+/*用来显示错误的，用在很多页上*/
+#content #errormsg{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	font-weight:bold;
+	width:100%;
+	color:red;
+	text-align:center;
+	margin:5px auto;
+	padding:0;
+}
+#content h1,h2,h3,h4,h5{
+	font-family:"Times New Roman", Times, serif;
+}
+#content h1,h2{
+	color:#1a5cc8;
+	text-align:center;
+}
+#content h1{
+	margin:18px auto;
+	font-size:28px;
+}
+#content h2{
+	margin:5px auto;
+	font-size:22px;
+}
+#content h3{
+	font-size:17px;
+	margin:8px auto;
+	color:#1a5cc8;
+	cursor:pointer;
+}
+
+/*用于 设置字体大小的 和各个 翻页的地方*/
+#content h4{
+	font-weight:normal;
+	margin:3px auto 0;
+	text-align:center;
+	color:#1a5cc8;
+	font-size:14px;
+}
+#content h4 span{
+	cursor:pointer;
+}
+#content h5{
+	font-family:"Times New Roman", Times, serif;
+	font-size:13px;
+	text-align:center;
+	color:green;
+	margin:0 auto;
+}
+#content #procon,#proinput,#prooutput,#prosamplein,#prosampleout,#prohint,#proauthor,#prosource,#prorecommend {
+	width:960px;
+	margin:0 0 0 20px;
+	line-height:1.4em;
+}
+#prosamplein pre, #prosampleout pre{
+	background-color:#f5f5f5;
+}
+/*用户比较的时候的几个层*/
+#content #u1_solve,#u1_fail,#u2_solve,#u2_fail,#both_solve,#both_fail{
+	width:80%;
+	margin:auto;
+	font-size:13px;
+}
+/*下面这个类用于seealso 和 submit*/
+.procenter{
+	font-family:"Times New Roman", Times, serif;
+	font-weight:bold;
+	text-align:center;
+	color:#1a5cc8;
+	font-size:16px;
+}
+/* only be used in problemset.php */
+#content #problemvol{
+	font-family:"Times New Roman", Times, serif;
+	list-style:none;
+	text-align:center;
+	color:#1a5cc8;
+	font-size:18px;
+	font-weight:bold;
+	margin:auto;
+	padding:0;
+}
+#content #problemvol li {
+	margin:14px auto;
+}
+/*用于大部分页面的表格*/
+#content #maintable{
+	font-family:Tahoma,"Times New Roman", Times, serif;
+	text-align:center;
+	font-size:12px;
+	width:100%;
+	margin:10px auto;
+}
+#content #maintable tr{
+	height:20px;
+}
+.tbheader{
+	font-family:Arial, Helvetica, sans-serif;
+	height:14px;
+	background-color:#1a5cc8;
+	color:white;
+}
+.tbheader a{
+	color:white;
+}
+
+/*下面部分是在statistic.php里左边的表格用的*/
+#content #ex_sta{
+	font-family:"Times New Roman", Times, serif;
+	float:left; 
+	width:200px; 
+	margin:60px auto;
+}
+#content #ex_sta a{
+	color:white;
+}
+.ex_sta_head{
+	background-color:#1a5cc8;
+	color:white;
+	width:80%;
+	text-align:right;
+}
+.ex_sta_body{
+	width:20%;
+	font-weight:bold;
+	color:white;
+	background-color:#FFA500;
+	text-align:center;
+}
+/*用户控制面板的导航*/
+#content #uccnav{
+	font-size:13px;
+	text-align:center;
+	margin:20px;
+}
+#content .conmandiv{
+	width:280px;
+	height:180px;
+	text-align:center;
+	float:left;
+	margin:10px 20px ;
+}
+.conmantb{
+	width:100%;
+	text-align:center;
+	font-size:12px;
+}
+#content #code{
+word-wrap: break-word; word-break:break-all; background-color:#f4fbff; border:#b7cbff 1px dashed; font-size:12px; font-family: Courier New, Courier; text-align:left; padding:10px;
+width:70%;
+height:485px;
+margin:auto;
+}
+#content #code h1{
+	font-weight:bold;
+	font-size:12px;
+	margin:1px;
+	color:black;
+}
+#content #code textarea{
+	font-family:"Courier New", Courier, monospace;
+	width:100%;
+	height:470px;
+	font-size: 12px;
+	background-color:#f4fbff;
+
+	overflow:visible;
+	border:0;
+}
+
+/*比赛的一些信息，包括颜色*/
+#content .contype{
+	font-size:14px;
+	margin:10px auto;
+	text-align:center;
+}
+#content .ctpublic{
+	color:red;
+}
+#content .ctprivate{
+	color:green;
+}
+#content .cspend{
+	color:green;
+}
+#content .csend{
+	color:gray;
+}
+#content .csrun{
+	color:red;
+}
+#content #position{
+	margin:10px auto;
+}
+#content #albumdiv{
+	width:900px;
+	margin:0 auto;
+}
+#content #albumdiv .smallone{
+	font-family:"Times New Roman", Times, serif;
+	width:180px;
+	float:left;
+}
+#content #albumdiv .smallone h1{
+	font-size:14px;
+	color:black;
+	margin:5px auto;
+}
+#content #albumdiv .smallone p{
+	font-size:13px;
+	text-align:center;
+	margin:2px auto;
+}
+
+#content #albumdiv .smallone img
+{
+	border:0;
+	margin:0 auto;
+	display:block;
+}
+#content #photodiv {
+	width:750px;
+	border:gray solid 1px;
+	margin:auto;
+}
+#content #photodiv img{
+	width:700px;
+	display:block;
+	border:0;
+	margin:20px auto 5px;
+}
+#content #photodiv h1{
+	font-size:12px;
+	color:black;
+	margin:8px;
+}
+#content #photodiv p{
+	width:350px;
+	font-size:12px;
+	margin:5px auto;
+}
+.c_green{
+	color:green;
+}
+
+.c_yellow{
+	color:orange;
+}
