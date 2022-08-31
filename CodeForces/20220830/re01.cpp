@@ -15,16 +15,18 @@ int main()
   cin.tie(0);
   // freopen("i.txt", "r", stdin);
   // freopen("o.txt", "w", stdout);
+  string str = "Timur";
+  sort(all(str));
   int T;
   cin >> T; // scanf("%d", &T);
   while (T--)
   {
     int n;
     cin >> n;
-    vector<int> a(n);
-    for (int &x : a)
-      cin >> x;
-    if (a[0] < a[n - 1])
+    string s;
+    cin >> s;
+    sort(all(s));
+    if (s == str)
       cout << "YES\n";
     else
       cout << "NO\n";

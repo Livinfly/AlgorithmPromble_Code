@@ -15,19 +15,34 @@ int main()
   cin.tie(0);
   // freopen("i.txt", "r", stdin);
   // freopen("o.txt", "w", stdout);
+  string sss = "Timur";
   int T;
   cin >> T; // scanf("%d", &T);
   while (T--)
   {
     int n;
     cin >> n;
-    vector<int> a(n);
-    for (int &x : a)
-      cin >> x;
-    if (a[0] < a[n - 1])
-      cout << "YES\n";
-    else
+    string str;
+    cin >> str;
+    if (n != 5)
+    {
       cout << "NO\n";
+      continue;
+    }
+    set<char> s;
+    for (auto x : str)
+      s.insert(x);
+    bool flag = false;
+    for (auto x : sss)
+      if (s.find(x) == s.end())
+      {
+        flag = true;
+        break;
+      }
+    if (flag)
+      cout << "NO\n";
+    else
+      cout << "YES\n";
   }
   return 0;
 }

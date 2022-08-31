@@ -21,10 +21,15 @@ int main()
   {
     int n;
     cin >> n;
-    vector<int> a(n);
-    for (int &x : a)
-      cin >> x;
-    if (a[0] < a[n - 1])
+    string s1, s2;
+    cin >> s1 >> s2;
+    for (auto &x : s1)
+      if (x == 'G')
+        x = 'B';
+    for (auto &x : s2)
+      if (x == 'G')
+        x = 'B';
+    if (s1 == s2)
       cout << "YES\n";
     else
       cout << "NO\n";
