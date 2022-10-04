@@ -17,37 +17,15 @@ int main()
   // freopen("i.txt", "r", stdin);
   // freopen("o.txt", "w", stdout);
   srand(time(0));
-  puts("3");
-  for (int T = 0; T < 3; T++)
+  puts("50");
+  for (int T = 0; T < 50; T++)
   {
-    int n = random((int)10 - 1) + 2, q = random((int)10) + 1;
-    printf("%d %d\n", n, q);
-    vector<bool> vis(n);
+    int n = random(20) + 1;
+    printf("%d\n", n);
     for (int i = 0; i < n; i++)
-    {
-      int x = random(n) + 1;
-      if (!vis[x - 1])
-      {
-        vis[x - 1] = true;
-        printf("%d ", x);
-      }
-      else
-      {
-        while (vis[x - 1])
-        {
-          x++;
-          if (x == n + 1)
-            x = 1;
-        }
-        vis[x - 1] = true;
-        printf("%d ", x);
-      }
-    }
+      printf("%d", random(2));
     puts("");
-    while (q--)
-    {
-      printf("%d %d\n", random(n) + 1, random((int)20) + 1);
-    }
   }
+
   return 0;
 }

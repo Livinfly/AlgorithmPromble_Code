@@ -21,13 +21,14 @@ int main()
   {
     int n;
     cin >> n;
-    vector<int> a(n);
-    for (int &x : a)
+    vector<LL> a(n);
+    for (LL &x : a)
       cin >> x;
-    if (a[0] < a[n - 1])
-      cout << "YES\n";
-    else
-      cout << "NO\n";
+    sort(all(a));
+    LL res = 1e18;
+    for (int i = 0; i < n - 2; i++)
+      res = min(res, a[i + 2] - a[i]);
+    cout << res << '\n';
   }
   return 0;
 }
