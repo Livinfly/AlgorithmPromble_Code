@@ -1,40 +1,54 @@
-#include <stdio.h>
-int f[201][20001];  // f[可选物品件数][剩余背包容量]
-int max(int a, int b);
-int main() {
-  int n, i, j, tot = 0;
-  int w[201];  //每件物品的价值，大小记得+1,便于数组下标与物品序号一一对应
-  w[0] = 0;
-  scanf("%d", &n);
-  for (i = 1; i < n + 1; i++) {
-    scanf("%d", &w[i]);
-    tot += w[i];
-  }
-  for (i = 0; i < n + 1; i++) {
-    for (j = 0; j < tot / 2 + 1; j++) {
-      f[i][j] = 0;
+#pragma GCC optimize(2)
+
+#include <bits/stdc++.h>
+
+#define fi first
+#define se second
+#define mkp(x, y) make_pair(x, y)
+#define all(x) (x).begin(), (x).end()
+
+using namespace std;
+
+typedef long long LL;
+typedef pair<int, int> PII;
+
+void solve() {
+    int a, b;
+    cin >> a >> b;
+    if(a+1 == b) {
+        cout << "-1\n";
+        return;
     }
-  }
-  for (i = 1; i < n + 1;
-       i++) {  //只需讨论一人的拿法：设该循环讨论的是A,总价值A<=B
-    if (w[i] > (tot / 2)) {  //若有一物超过总价值一半：把该物给B，其余物品均给A
-      f[n][tot / 2] = tot - w[i];
-      break;
+    if(__gcd(a, b) > 1) {
+        cout << "0\n";
+        return;
     }
-    for (j = 1; j < tot / 2 + 1; j++) {  // 0-1背包算法
-      if (w[i] > j) {
-        f[i][j] = f[i - 1][j];
-      } else {
-        f[i][j] = max(f[i - 1][j], f[i - 1][j - w[i]] + w[i]);
-      }
+    int dx = b-a;
+    vector<int> divs;
+    for(int i = 2; i <= dx/i; i ++) {
+        if(dx % i == 0) {
+            divs.push_back(i);
+            do {
+                dx /= i;
+            } while(dx % i == 0);
+        }
     }
-  }
-  printf("%d", tot - 2 * f[n][tot / 2]);  // tot-2*f[n][tot/2] ==
-                                          // (tot-f[n][tot/2])-f[n][tot/2]
-  return 0;
+    if(dx > 1) divs.push_back(dx);
+    int res = (int)1e9;
+    for(int x : divs) {
+        res = min(res, x-(a-a/x*x));
+    }
+    cout << res << '\n';
 }
-int max(int a, int b) {
-  int s = a;
-  if (b > a) s = b;
-  return s;
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout << fixed;  // << setprecision(20); // double
+    // freopen("i.txt", "r", stdin);
+    // freopen("o.txt", "w", stdout);
+    int T;
+    cin >> T;  // scanf("%d", &T);
+    while (T--) solve();
+    return 0;
 }

@@ -15,11 +15,14 @@ int main() {
   // freopen("i.txt", "r", stdin);
   // freopen("o.txt", "w", stdout);
   srand(time(0));
-  int n = random(199) + 1;
+  int n = random(100)+1;
   printf("%d\n", n);
-  for (int i = 0; i < n; i++) {
-    cout << random(199) + 1 << ' ';
+  for(int i = 0; i < n; i ++) {
+    int a = random(10000000)+1, b = random(10000000)+1;
+    if(a > b) swap(a, b);
+    if(a == b) b = a+1;
+    printf("%d %d\n", a, b);
   }
-  cout << '\n';
+  
   return 0;
 }
