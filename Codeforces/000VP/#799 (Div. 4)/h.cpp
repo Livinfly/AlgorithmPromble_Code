@@ -28,7 +28,7 @@ void solve() {
         for(int i = 0; i < vec.size(); i ++) {
             int p = vec[i];
             int cur = i-(p-i);
-            if(cur < mn) {
+            if(cur < mn) { // [1, p-1] is suck, from [p
                 mn = cur;
                 tl = p;
             }
@@ -55,3 +55,7 @@ int main() {
     while (Tcase--) solve();
     return 0;
 }
+/*
+前缀和相关的区间最大值 O(n)
+动态维护的信息 **
+*/
