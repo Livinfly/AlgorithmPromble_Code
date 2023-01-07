@@ -12,7 +12,17 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
-
+void solve() {
+    int n;
+    cin >> n;
+    int cnt = 0;
+    for(int i = 0; i < n; i ++) {
+        int x;
+        cin >> x;
+        if(x & 1) cnt ++;
+    }
+    cout << cnt << '\n';
+}
 
 int main() {
     ios::sync_with_stdio(0);
@@ -20,12 +30,8 @@ int main() {
     cout << fixed;  // << setprecision(20); // double
     // freopen("i.txt", "r", stdin);
     // freopen("o.txt", "w", stdout);
-    LL n;
-    cin >> n;
-    LL t = Sqrt(n);
-    if(t*t == n) 
-        cout << "YES\n";
-    else 
-        cout << "NO\n";
+    int Tcase;
+    cin >> Tcase;  // scanf("%d", &Tcase);
+    while (Tcase--) solve();
     return 0;
 }

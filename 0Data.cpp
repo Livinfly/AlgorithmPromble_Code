@@ -1,28 +1,24 @@
+#pragma GCC optimize(2)
+
 #include <bits/stdc++.h>
 
-#include <ctime>
+#define fi first
+#define se second
+#define mkp(x, y) make_pair((x), (y))
+#define all(x) (x).begin(), (x).end()
 
 using namespace std;
 
 typedef long long LL;
-
-int random(int x) {  // 获取 0~x-1 中间的一个随机数
-  if (!x) return 0;
-  return (LL)rand() * rand() % x;
-}
+typedef pair<int, int> PII;
 
 int main() {
-  // freopen("i.txt", "r", stdin);
-  // freopen("o.txt", "w", stdout);
-  srand(time(0));
-  int n = random(100)+1;
-  printf("%d\n", n);
-  for(int i = 0; i < n; i ++) {
-    int a = random(10000000)+1, b = random(10000000)+1;
-    if(a > b) swap(a, b);
-    if(a == b) b = a+1;
-    printf("%d %d\n", a, b);
-  }
-  
-  return 0;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout << fixed;  // << setprecision(20); // double
+    // freopen("i.txt", "r", stdin);
+    // freopen("o.txt", "w", stdout);
+    mt19937_64 mt_rand(time(0));
+    cout<<mt_rand()<<endl;
+    return 0;
 }

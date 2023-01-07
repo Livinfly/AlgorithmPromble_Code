@@ -12,27 +12,11 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
-void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for(int &x : a) cin >> x;
-    int t = 0;
-    while((1<<t)+1 < n) t ++;
-    // cout << t << '\n';
-    int res = 0;
-    if(n & 1) {
-        for(int i = 0; i < min(2, n); i ++)
-            res = res + a[i]*(t+1);
-        for(int i = 2; i < n; i ++)
-            res = res + a[i]*t;
-        cout << res << '\n';
-    }
-    else {
-        for(int i = 0; i < n; i ++) 
-            res = res + a[i]*t;
-        cout << res << '\n';
-    }
+LL Sqrt(LL n) {
+    LL v = sqrt(n);
+    while ((v + 1) * (v + 1) <= n) v++;
+    while (v * v > n) v--;
+    return v;
 }
 
 int main() {
@@ -41,6 +25,16 @@ int main() {
     cout << fixed;  // << setprecision(20); // double
     // freopen("i.txt", "r", stdin);
     // freopen("o.txt", "w", stdout);
-    solve();
+    for(LL n = 310000000000LL; n <= (LL)9e18; n ++) {
+        LL t = sqrt(n)+0.1, T = Sqrt(n);
+        if(n % 100000000 == 0)
+            cout << n << endl;
+        if((t*t == n) ^ (T*T == n)) {
+            cout << n << '\n';
+            cout << "?????\n";
+            break;
+        }
+    }
+    
     return 0;
 }
