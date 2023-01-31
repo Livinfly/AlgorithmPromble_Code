@@ -12,11 +12,7 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
-mt19937_64 mt_rand(time(0));
 
-LL random(LL x) {
-    return mt_rand()%x;
-}
 
 int main() {
     ios::sync_with_stdio(0);
@@ -24,11 +20,12 @@ int main() {
     cout << fixed;  // << setprecision(20); // double
     // freopen("i.txt", "r", stdin);
     // freopen("o.txt", "w", stdout);
-    string tmp = "SRP";
-    int n = random(50000)+1, m = random(n)+1;
-    cout << n << ' ' << m << '\n';
-    for(int i = 0; i < n; i ++)
-        cout << tmp[random(3)];
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    int sum = 0;
+    for(int &x : a) cin >> x, sum ^= x;
+    for(int &x : a) x ^= sum, cout << x << ' ';
     cout << '\n';
     return 0;
 }

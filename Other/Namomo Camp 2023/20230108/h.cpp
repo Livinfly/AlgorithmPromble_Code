@@ -12,23 +12,27 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
-mt19937_64 mt_rand(time(0));
-
-LL random(LL x) {
-    return mt_rand()%x;
-}
-
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout << fixed;  // << setprecision(20); // double
     // freopen("i.txt", "r", stdin);
     // freopen("o.txt", "w", stdout);
-    string tmp = "SRP";
-    int n = random(50000)+1, m = random(n)+1;
-    cout << n << ' ' << m << '\n';
-    for(int i = 0; i < n; i ++)
-        cout << tmp[random(3)];
-    cout << '\n';
+    int n;
+    cin >> n;
+    vector<LL> divs(n+1);
+    for(int i = 1; i <= n; i ++)
+        for(int j = i; j <= n; j += i) 
+            divs[j] ++;
+    LL res = 0;
+    for(int i = 1; i <= n; i ++) 
+        res += i*divs[i];
+        
+    cout << res << '\n';
     return 0;
 }
+/*
+可以sqrt(n)
+
+
+*/

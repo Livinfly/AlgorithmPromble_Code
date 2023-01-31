@@ -12,10 +12,25 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
-mt19937_64 mt_rand(time(0));
+const int N = 1e5+10;
 
-LL random(LL x) {
-    return mt_rand()%x;
+LL n;
+LL a[N];
+
+
+
+void solve() {
+    cin >> n;
+    for(int i = 1; i <= n; i ++)
+        cin >> a[i];
+    sort(a+1, a+n+1);
+    LL res = 0;
+    for(int i = 1; i <= n; i ++) {
+        if(a[i] > i) {
+            res += 2*(min(a[i], n)-i);
+        }
+    }
+    cout << res << '\n';
 }
 
 int main() {
@@ -24,11 +39,9 @@ int main() {
     cout << fixed;  // << setprecision(20); // double
     // freopen("i.txt", "r", stdin);
     // freopen("o.txt", "w", stdout);
-    string tmp = "SRP";
-    int n = random(50000)+1, m = random(n)+1;
-    cout << n << ' ' << m << '\n';
-    for(int i = 0; i < n; i ++)
-        cout << tmp[random(3)];
-    cout << '\n';
+    // int Tcase;
+    // cin >> Tcase; // scanf("%d", &Tcase);
+    // while (Tcase--) 
+    solve();
     return 0;
 }
