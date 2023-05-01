@@ -11,9 +11,37 @@ using namespace std;
 
 typedef long long LL;
 typedef pair<int, int> PII;
+typedef pair<LL, int> PLI;
 
 void solve() {
-    //
+    int n;
+    cin >> n;
+    map<int, LL, greater<int>> sr, sc;
+    map<PII, int> val;
+    for(int i = 0; i < n; i ++) {
+        int r, c, x;
+        cin >> r >> c >> x;
+        sr[r] += x, sc[c] += x;
+        val[{r, c}] = x;
+    }
+    // sort by sum-val
+    vector<PLI> R, C;
+    for(auto [r, rx] : sr) {
+        R.emplace_back(rx, r);
+    }
+    for(auto [c, cx] : sc)
+        C.emplace_back(cx, c);
+    sort(all(R), greater<PLI>());
+    sort(all(C), greater<PLI>());
+    LL res = 0;
+    for(auto [rx, r] : R)
+        for(auto [cx, c] : C) {
+            res = max(res, rx+cx-val[{r, c}]);
+            if(val[{r, c}] == 0) {
+                break;
+            }
+        }
+    cout << res << '\n';
 }
 
 int main() {
