@@ -14,14 +14,17 @@ typedef pair<int, int> PII;
 
 void solve() {
     int n;
+    cin >> n;
+    set<string> dir = {"and", "not", "that", "the", "you"};
     string s;
-    cin >> n >> s;
-    for(int i = 1; i < n; i ++)
-    	if(s[i] == s[i-1]) {
-    		cout << "No\n";
+    while(n --) {
+    	cin >> s;
+    	if(dir.count(s)) {
+    		cout << "Yes\n";
     		return;
     	}
-    cout << "Yes\n";
+    }
+    cout << "No\n";
 }
 
 int main() {

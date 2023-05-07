@@ -13,15 +13,15 @@ typedef long long LL;
 typedef pair<int, int> PII;
 
 void solve() {
-    int n;
-    string s;
-    cin >> n >> s;
-    for(int i = 1; i < n; i ++)
-    	if(s[i] == s[i-1]) {
-    		cout << "No\n";
-    		return;
-    	}
-    cout << "Yes\n";
+    vector<string> g(8);
+    for(auto &s : g) 
+    	cin >> s;
+    for(int i = 0; i < 8; i ++)
+    	for(int j = 0; j < 8; j ++)
+    		if(g[i][j] == '*') {
+    			cout << (char)('a'+j) << 8-i << '\n';
+    			return;
+    		}
 }
 
 int main() {

@@ -14,14 +14,33 @@ typedef pair<int, int> PII;
 
 void solve() {
     int n;
-    string s;
-    cin >> n >> s;
-    for(int i = 1; i < n; i ++)
-    	if(s[i] == s[i-1]) {
-    		cout << "No\n";
-    		return;
-    	}
-    cout << "Yes\n";
+    cin >> n;
+    vector<int> a(n+1), deg(n+1);
+    for(int i = 1; i <= n; i ++) {
+    	cin >> a[i];
+        deg[a[i]] ++;
+    }
+    auto TopoSort = [&]() {
+        queue<int> q;
+        for(int i = 1; i <= n; i ++) {
+            if(!deg[i]) {
+                q.push(i);
+            }
+        }
+        while(q.size()) {
+            auto u = q.front();
+            q.pop();
+            if(-- deg[a[u]] == 0) {
+                q.push(a[u]);
+            }
+        }
+    };
+    TopoSort();
+    int ans = 0;
+    for(auto x : deg) {
+        ans += x;
+    }
+    cout << ans << '\n';
 }
 
 int main() {

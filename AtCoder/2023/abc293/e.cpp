@@ -12,16 +12,30 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
+int qpm(int a, LL b, const int &c) {
+	int ans = 1;
+	while(b) {
+		if(b & 1) ans = 1LL*ans*a%c;
+		a = 1LL*a*a%c;
+		b >>= 1;
+	}
+	return ans;
+}
+int work(int a, LL x, const int &MO) {
+	if(x == 0) return 1%MO;
+	if(x == 1) return (a+1)%MO;
+	if(x & 1) {
+		return (1LL+qpm(a, x/2+1, MO))%MO*work(a, x/2, MO)%MO;
+	}
+	else {
+		return ((1LL+qpm(a, x/2, MO))%MO*work(a, x/2-1, MO)%MO + qpm(a, x, MO)) % MO;
+	}
+}
 void solve() {
-    int n;
-    string s;
-    cin >> n >> s;
-    for(int i = 1; i < n; i ++)
-    	if(s[i] == s[i-1]) {
-    		cout << "No\n";
-    		return;
-    	}
-    cout << "Yes\n";
+    int a, m;
+    LL x;
+    cin >> a >> x >> m;
+    cout << work(a, x-1, m) << '\n';
 }
 
 int main() {

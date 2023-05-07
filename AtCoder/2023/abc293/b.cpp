@@ -12,12 +12,27 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
-LL get() {
-	return (false ? 1 : 1e18);
-}
 void solve() {
-	cout << get() << '\n';
-	cout << (LL)1e18 << '\n';
+	int n;
+	cin >> n;
+    vector<bool> vis(n+1);
+    for(int i = 1; i <= n; i ++) {
+    	int x;
+    	cin >> x;
+    	if(!vis[i]) 
+    		vis[x] = true;
+    }
+    vector<int> ans;
+    for(int i = 1; i <= n; i ++) {
+    	if(!vis[i]) {
+    		ans.push_back(i);
+    	}
+    }
+    cout << ans.size() << '\n';
+    for(auto x : ans) {
+    	cout << x << ' ';
+    }
+    cout << '\n';
 }
 
 int main() {
