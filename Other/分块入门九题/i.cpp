@@ -12,56 +12,80 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
-struct Rec {
-    int l, r, qid;
-};
+int n, bSize, bNum;
+vector<int> a, belong, cnt, val;
+int nid;
+map<int, int> mp;
+vector<vector<int>> va, f;
 
-int n, bSize, bNum, ansx;
-vector<int> a, belong, cnt;
-vector<Rec> query;
-map<int, int> num;
-
-void add(int x) {
-    //
+void PrevCalc() {
+    for(int i = 1; i <= bNum; i ++) {
+        int mx = 0, res = 0;
+        cnt.assign(n+1, 0);
+        for(int j = (i-1)*bSize + 1; j <= n; j ++) {
+            int bj = belong[j];
+            cnt[a[j]] ++;
+            if(cnt[a[j]] > mx || cnt[a[j]] == mx && val[a[j]] < val[res])
+                mx = cnt[a[j]], res = a[j];
+            f[i][bj] = res;
+        }
+    }
 }
-void del(int x) {
-    //
+int Query(int l, int r, int c) {
+    return (upper_bound(all(va[c]), r) - lower_bound(all(va[c]), l));
+}
+int Query(int l, int r) {
+    int bl = belong[l], br = belong[r], ret = 0, mx = 0;
+    if(bl == br) {
+        for(int i = l; i <= r; i ++) {
+            int t = Query(l, r, a[i]);
+            if(t > mx || t == mx && val[a[i]] < val[ret]) {
+                mx = t, ret = a[i];
+            }
+        }
+    }
+    else {
+        ret = f[bl+1][br-1], mx = Query(l, r, ret);
+        for(int i = l; i <= n && belong[i] == bl; i ++) {
+            int t = Query(l, r, a[i]);
+            if(t > mx || t == mx && val[a[i]] < val[ret]) {
+                mx = t, ret = a[i];
+            }
+        }
+        for(int i = r; i > 0 && belong[i] == br; i --) {
+            int t = Query(l, r, a[i]);
+            if(t > mx || t == mx && val[a[i]] < val[ret]) {
+                mx = t, ret = a[i];
+            }
+        }
+    }
+    return val[ret];
 }
 void solve() {
     cin >> n;
-    a.resize(n+1), belong.resize(n+1), query.resize(n+1), cnt.resize(n+1);
-    bSize = sqrt(n), bNum = (n-1)/bSize + 1;
+    bSize = sqrt(n/(log(n)/log(2.0))), bNum = (n-1)/bSize + 1;
+    a.resize(n+1), belong.resize(n+1), val.resize(n+1), va.resize(n+1), f.resize(bNum+1);
+    for(auto &v : f) 
+        v.resize(bNum+1);
     for(int i = 1; i <= n; i ++) {
         cin >> a[i];
         belong[i] = (i-1)/bSize + 1;
+        if(!mp.count(a[i])) {
+            mp[a[i]] = ++ nid;
+            val[nid] = a[i];
+        }
+        a[i] = mp[a[i]];
+        va[a[i]].push_back(i);
     }
-    for(int i = 1; i <= n; i ++) {
-        auto &[l, r, qid] = query[i];
+    PrevCalc();
+    int ans = 0;
+    for(int i = 0; i < n; i ++) {
+        int l, r;
         cin >> l >> r;
-        qid = i;
-    }
-    sort(1+all(query), [&](const Rec &a, const Rec &b) {
-        int abl = belong[a.l], bbl = belong[b.l];
-        if(abl != bbl) {
-            return abl < bbl;
-        }
-        else {
-            if(abl & 1) return a.r < b.r;
-            else return a.r > b.r;
-        }
-    });
-    vector<int> ans(n+1);
-    int l = 1, r = 0;
-    for(int i = 1; i <= n; i ++) {
-        auto [ll, rr, qid] = query[i];
-        while(l < ll) del(l ++);
-        while(l > ll) add(-- l);
-        while(r < rr) add(++ r);
-        while(r > rr) del(r --);
-        ans[qid] = ansx;
-    }
-    for(int i = 1; i <= n; i ++) {
-        cout << ans[i] << " \n"[i == n];
+        // l = (l+ans-1) % n + 1, r = (r+ans-1) % n + 1;;
+        if(l > r) swap(l, r);
+        ans = Query(l, r);
+        cout << ans << '\n';
     }
 }
 
