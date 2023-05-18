@@ -12,20 +12,33 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
+ 
+  int N = 45, MO = 998244353;
+
+int f[N][N][N][11];
+
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> f(n+1);
-    for(int i = 1; i <= n; i ++) {
-    	for(int j = 1; i*j <= n; j ++) {
-    		f[i*j] ++;
+	memset(f, -1, sizeof f);
+    int n, m;
+    cin >> n >> m;
+    vector<string> a(n);
+    for(auto &v : a) cin >> v;
+    function<int(int, int, int, int)> dfs = [&](int l, int r, int k, int c) {
+    	auto &ff = f[l][r][k][c];
+    	if(~ff) return ff;
+    	if(k == m) return ff = (l == r);
+    	if(l > r) return ff = 1;
+    	if(c == 10) return ff = 0;
+    	ff = dfs(l, r, k, c+1);
+    	for(int i = l; i <= r; i ++) {
+    		if(a[i][k] != '?' && a[i][k] != '0'+c) {
+    			break;
+    		}
+    		ff = (1LL*ff + 1LL*dfs(l, i, k+1, 0)*dfs(i+1, r, k, c+1) % MO) % MO;
     	}
-    }
-    LL ans = 0;
-    for(int i = 1; i <= n; i ++) {
-    	ans += f[i] * f[n-i];
-    }
-    cout << ans << '\n';
+    	return ff;
+    };
+    cout << dfs(0, n-1, 0, 0) << '\n';
 }
 
 int main() {

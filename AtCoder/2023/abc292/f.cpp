@@ -12,26 +12,31 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
+const double PI = acos(-1.0);
+
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> f(n+1);
-    for(int i = 1; i <= n; i ++) {
-    	for(int j = 1; i*j <= n; j ++) {
-    		f[i*j] ++;
-    	}
+    double a, b;
+    cin >> a >> b;
+    if(a < b) swap(a, b);
+    if(b * 2 <= a * sqrt(3.0)) {
+    	cout << b*2/sqrt(3.0) << '\n';
+    	return;
     }
-    LL ans = 0;
-    for(int i = 1; i <= n; i ++) {
-    	ans += f[i] * f[n-i];
+    double l = b, r = b*2/sqrt(3.0);
+    while(r-l > 1e-12) {
+    	double mid = (l+r) / 2;
+    	double alpha = acos(b / mid);
+    	alpha = PI/6 - alpha;
+    	if(mid*cos(alpha) <= a) l = mid;
+    	else r = mid;
     }
-    cout << ans << '\n';
+    cout << r << '\n';
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    cout << fixed;  // << setprecision(20); // double
+    cout << fixed << setprecision(20); // double
     // freopen("i.txt", "r", stdin);
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();

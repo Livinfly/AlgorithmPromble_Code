@@ -12,20 +12,34 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
+const int N = 2010;
+
+vector<int> e[N];
+
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> f(n+1);
-    for(int i = 1; i <= n; i ++) {
-    	for(int j = 1; i*j <= n; j ++) {
-    		f[i*j] ++;
+    int n, m;
+    cin >> n >> m;
+    for(int i = 0; i < m; i ++) {
+    	int a, b;
+    	cin >> a >> b;
+    	e[a].push_back(b);
+    }
+    int ans = 0;
+    vector<bool> vis;
+    function<void(int)> dfs = [&](int u){
+    	vis[u] = true;
+    	ans ++;
+    	for(auto v : e[u]) {
+    		if(!vis[v]) {
+				dfs(v);
+    		}
     	}
-    }
-    LL ans = 0;
+    };
     for(int i = 1; i <= n; i ++) {
-    	ans += f[i] * f[n-i];
+    	vis.assign(n+1, false);
+    	dfs(i);
     }
-    cout << ans << '\n';
+    cout << ans-m-n << '\n';
 }
 
 int main() {

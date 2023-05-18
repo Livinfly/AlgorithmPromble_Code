@@ -13,19 +13,32 @@ typedef long long LL;
 typedef pair<int, int> PII;
 
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> f(n+1);
-    for(int i = 1; i <= n; i ++) {
-    	for(int j = 1; i*j <= n; j ++) {
-    		f[i*j] ++;
-    	}
-    }
-    LL ans = 0;
-    for(int i = 1; i <= n; i ++) {
-    	ans += f[i] * f[n-i];
-    }
-    cout << ans << '\n';
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n), b(n), f(2e5+1, -1), g(2e5+1, -1);
+   	for(auto &x : a) cin >> x;
+   	for(auto &x : b) cin >> x;
+   	f[0] = 0;
+	for(int i = 0; i < n; i ++) {
+		for(int j = 2e5; j >= a[i]; j --) {
+			if(f[j-a[i]] != -1) {
+				f[j] = max(f[j], f[j-a[i]] + b[i]);
+			}
+		}
+	}
+	for(int S = 1; S <= 2e5; S ++) {
+		for(int T = S; T; T = (T-1) & S) {
+			if(T < k) continue;
+			g[S] = max(g[S], f[T]);
+		}
+	}
+	int ans = -1;
+	for(int i = 1; i <= 2e5; i ++) {
+		if(g[i] != -1 && (i^((1<<18)-1)) <= 2e5 && g[i^((1<<18)-1)] != -1) {
+			ans = max(ans, g[i] + g[i^((1<<18)-1)]);
+		}
+	}
+	cout << ans << '\n';
 }
 
 int main() {
