@@ -12,12 +12,15 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
+const int MO = 19961;
+
 void solve() {
-    int n, d, k;
-    cin >> n >> d >> k;
-    k --;
-    int a = n / __gcd(n, d);
-    cout << k/a + 1LL*k*d%n << '\n';
+    int n;
+    cin >> n;
+    int ans = 1;
+    for(int i = 1; i <= n; i ++)
+    	ans = ans*i % MO;
+    cout << ans << '\n';
 }
 
 int main() {
@@ -28,7 +31,7 @@ int main() {
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
     int Tcase = 1;
-    cin >> Tcase; // scanf("%d", &Tcase);
+    // cin >> Tcase; // scanf("%d", &Tcase);
     while (Tcase--) 
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";

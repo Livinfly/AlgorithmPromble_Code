@@ -12,33 +12,33 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
- 
-const int N = 45, MO = 998244353;
-
-int f[N][N][N][11];
+const LL INF = 1e18;
 
 void solve() {
-	memset(f, -1, sizeof f);
-    int n, m;
-    cin >> n >> m;
-    vector<string> a(n);
-    for(auto &v : a) cin >> v;
-    function<int(int, int, int, int)> dfs = [&](int l, int r, int k, int c) {
-    	auto &ff = f[l][r][k][c];
-    	if(~ff) return ff;
-    	if(k == m) return ff = (l == r);
-    	if(l > r) return ff = 1;
-    	if(c == 10) return ff = 0;
-    	ff = dfs(l, r, k, c+1);
-    	for(int i = l; i <= r; i ++) {
-    		if(a[i][k] != '?' && a[i][k] != '0'+c) {
-    			break;
-    		}
-    		ff = (1LL*ff + 1LL*dfs(l, i, k+1, 0)*dfs(i+1, r, k, c+1) % MO) % MO;
-    	}
-    	return ff;
-    };
-    cout << dfs(0, n-1, 0, 0) << '\n';
+	int n, m;
+	cin >> n >> m;
+	vector<int> a(n+1), c(n+1);
+	vector<bool> vis(n+1);
+    vector<vector<LL>> dp(n+2, vector<LL>(n+2, INF));
+    for(int i = 1; i <= n; i ++) cin >> a[i];
+    for(int i = 1; i <= n; i ++) cin >> c[i];
+    for(int i = 0; i < m; i ++) {
+    	int x;
+    	cin >> x;
+    	vis[x] = true;
+    }
+    dp[0][0] = 0;
+    for(int i = 1; i <= n; i ++) {
+		int cost = 1e9;
+		for(int j = 0; j <= i; j ++) {
+			cost = min(cost, c[i-j]);
+			dp[i][j+1] = min(dp[i][j+1], dp[i-1][j] + cost + a[i]);
+			if(!vis[i]) {
+				dp[i][j] = min(dp[i][j], dp[i-1][j]);
+			}
+		}
+    }
+    cout << *min_element(all(dp[n])) << '\n';
 }
 
 int main() {

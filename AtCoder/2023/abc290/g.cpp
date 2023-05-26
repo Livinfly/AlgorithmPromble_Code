@@ -13,11 +13,27 @@ typedef long long LL;
 typedef pair<int, int> PII;
 
 void solve() {
-    int n, d, k;
-    cin >> n >> d >> k;
-    k --;
-    int a = n / __gcd(n, d);
-    cout << k/a + 1LL*k*d%n << '\n';
+    LL d, k, x;
+    cin >> d >> k >> x;
+    LL  ans = 1e18;
+    vector<LL> a(d+1);
+    a[0] = 1;
+    for(int i = 1; i <= d; i ++) {
+    	a[i] = a[i-1]*k + 1;
+    }
+    for(int i = 0; i <= d; i ++) {
+    	if(a[i] >= x) {
+    		LL res = (i < d);
+    		LL cut = a[i]-x;
+    		for(int j = i-1; j >= 0; j --) {
+    			LL l = cut/a[j];
+    			cut -= a[j]*l;
+    			res += l;
+    		}
+    		ans = min(ans, res);
+    	}
+    }
+    cout << ans << "\n";
 }
 
 int main() {

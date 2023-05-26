@@ -48,69 +48,12 @@ struct FenwickTree {
         return x;
     }
 };
-vector<FenwickTree<int>> fens(26);
+FenwickTree<int> fen;
 
-bool check(vector<int> a, int l) {
-	for(int i = 0; i < 26; i ++) {
-		if(fens[i].rangeSum(l, l+a[i]-1) != a[i]) {
-			return false;
-		}
-		l += a[i];
-	}
-	return true;
-}
 void solve() {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    s = " " + s;
-    for(auto &fen : fens) {
-    	fen.init(n);
-    }
-    vector<int> cnt(26);
-  	for(int i = 1; i <= n; i ++) {
-  		int x = s[i]-'a';
-		fens[x].add(i, 1);
-		cnt[x] ++;
-  	}
-    int Q;
-    cin >> Q;
-    while(Q --) {
-    	int op;
-    	cin >> op;
-    	if(op == 1) {
-    		int x;
-            char c;
-    		cin >> x >> c;
-    		int tx = s[x]-'a', ty = c-'a';
-    		fens[tx].add(x, -1);
-    		fens[ty].add(x, 1);
-    		cnt[tx] --, cnt[ty] ++;
-            s[x] = c;
-    	}
-    	else {
-    		int l, r;
-    		cin >> l >> r;
-    		vector<int> tcnt(26);
-    		for(int i = 0; i < 26; i ++) {
-    			tcnt[i] = fens[i].rangeSum(l, r);
-    		}
-    		int ll = 0, rr = 25;
-    		while(!tcnt[ll]) ll ++;
-    		while(!tcnt[rr]) rr --;
-    		bool ok = true;
-    		for(int i = ll+1; i < rr; i ++) {
-    			if(cnt[i] != tcnt[i]) {
-    				ok = false;
-    				break;
-    			}
-    		}
-    		ok &= check(tcnt, l);
-            
-            cout << (ok ? "Yes" : "No") << '\n';
-    	}
-    }
+    fen.init(1000);
+    fen.add(1, 2), fen.add(2, 4);
+    cout << fen.kth(0) << '\n';
 }
 
 int main() {

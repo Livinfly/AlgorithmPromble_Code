@@ -13,11 +13,9 @@ typedef long long LL;
 typedef pair<int, int> PII;
 
 void solve() {
-    int n, d, k;
-    cin >> n >> d >> k;
-    k --;
-    int a = n / __gcd(n, d);
-    cout << k/a + 1LL*k*d%n << '\n';
+    int a, b;
+    cin >> a >> b;
+    cout << a + b << '\n';
 }
 
 int main() {

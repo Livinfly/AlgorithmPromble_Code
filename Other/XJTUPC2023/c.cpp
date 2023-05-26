@@ -13,22 +13,20 @@ typedef long long LL;
 typedef pair<int, int> PII;
 
 void solve() {
-    int n, d, k;
-    cin >> n >> d >> k;
-    k --;
-    int a = n / __gcd(n, d);
-    cout << k/a + 1LL*k*d%n << '\n';
+    double x, y, z;
+    cin >> x >> y >> z;
+    cout << 1.0/x/y*z << '\n';
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    cout << fixed;  // << setprecision(20); // double
+    cout << fixed << setprecision(6); // double
     // freopen("i.txt", "r", stdin);
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
     int Tcase = 1;
-    cin >> Tcase; // scanf("%d", &Tcase);
+    // cin >> Tcase; // scanf("%d", &Tcase);
     while (Tcase--) 
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";

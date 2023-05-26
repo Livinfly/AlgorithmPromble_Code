@@ -13,11 +13,24 @@ typedef long long LL;
 typedef pair<int, int> PII;
 
 void solve() {
-    int n, d, k;
-    cin >> n >> d >> k;
-    k --;
-    int a = n / __gcd(n, d);
-    cout << k/a + 1LL*k*d%n << '\n';
+   	int n, m;
+   	cin >> n >> m;
+   	vector<string> s(n);
+   	set<string> st;
+   	for(auto &x : s) cin >> x;
+   	for(int i = 0; i < m; i ++) {
+   		string t;
+   		cin >> t;
+   		st.insert(t);
+   	}
+   	int cnt = 0;
+   	for(auto x : s) {
+   		if(x.size() >= 3 && st.count(x.substr(x.size()-3, 3))) {
+            // cout << x.substr(x.size()-3, 3) << '\n';
+   			cnt ++;
+   		}
+   	}
+   	cout << cnt << '\n';
 }
 
 int main() {
@@ -28,7 +41,7 @@ int main() {
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
     int Tcase = 1;
-    cin >> Tcase; // scanf("%d", &Tcase);
+    // cin >> Tcase; // scanf("%d", &Tcase);
     while (Tcase--) 
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";

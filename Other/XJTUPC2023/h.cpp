@@ -12,33 +12,41 @@ using namespace std;
 typedef long long LL;
 typedef pair<int, int> PII;
 
- 
-const int N = 45, MO = 998244353;
-
-int f[N][N][N][11];
-
 void solve() {
-	memset(f, -1, sizeof f);
-    int n, m;
-    cin >> n >> m;
-    vector<string> a(n);
-    for(auto &v : a) cin >> v;
-    function<int(int, int, int, int)> dfs = [&](int l, int r, int k, int c) {
-    	auto &ff = f[l][r][k][c];
-    	if(~ff) return ff;
-    	if(k == m) return ff = (l == r);
-    	if(l > r) return ff = 1;
-    	if(c == 10) return ff = 0;
-    	ff = dfs(l, r, k, c+1);
-    	for(int i = l; i <= r; i ++) {
-    		if(a[i][k] != '?' && a[i][k] != '0'+c) {
+    int n;
+    cin >> n;
+    vector<array<int, 26>> cnt(n);
+    for(int i = 0; i < n; i ++) {
+    	string s;
+    	cin >> s;
+    	for(auto x : s) {
+    		cnt[i][x-'a'] ++;
+    	}
+    }
+    int x = -1;
+    for(int i = 0; i < 26; i ++) {
+    	set<int> st;
+    	for(int j = 0; j < n; j ++) {
+    		if(st.count(cnt[j][i])) {
     			break;
     		}
-    		ff = (1LL*ff + 1LL*dfs(l, i, k+1, 0)*dfs(i+1, r, k, c+1) % MO) % MO;
+    		st.insert(cnt[j][i]);
     	}
-    	return ff;
-    };
-    cout << dfs(0, n-1, 0, 0) << '\n';
+    	if(st.size() == n) {
+    		x = i;
+    	}
+    }
+    if(x == -1) {
+    	cout << "No\n";
+    	return;
+    }
+    cout << "Yes\n";
+    for(int i = 0; i < 26; i ++) {
+    	if(i != x) {
+    		cout << (char)(i+'a');
+    	}
+    }
+    cout << (char)(x+'a') << '\n';
 }
 
 int main() {
