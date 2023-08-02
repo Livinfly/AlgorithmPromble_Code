@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -13,21 +13,21 @@ typedef long long LL;
 typedef double db;
 typedef pair<int, int> PII;
 
+const int N = 1e6+10;
+
+int n;
+int a[N];
+
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    cin >> n;
+    for(int i = 1; i <= n; i ++) cin >> a[i];
+    sgt.build(1, 1, n);
+    LL ans = 0;
+    for(int i = 0; i+2 <= n; i ++) { // i..mn(x)..mx(y)..j
+        int x, y, j;
+        y = sgt.queryLess(1, i+2, n, a[i]);
+        x = sgt.queryMin(1, i+1, y);
+        j = sgt.query
     }
 }
 

@@ -13,22 +13,30 @@ typedef long long LL;
 typedef double db;
 typedef pair<int, int> PII;
 
+// x*y, y
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    int n, m;
+    cin >> n >> m;
+    vector<int> deg(n);
+    vector<vector<int>> e(n);
+    while(m --) {
+        int u, v; cin >> u >> v;
+        u--, v--;
+        e[u].push_back(v), e[v].push_back(u);
+        deg[u]++, deg[v]++;
     }
+    int cnt = 0;
+    for(auto x: deg) cnt += (x == 1);
+    int x, y;
+    for(int i = 0; i < n; i ++) {
+        if(deg[i] == 1) {
+            int t = e[i].back();
+            y = e[t].size()-1;
+            break;
+        }
+    }
+    x = cnt/y;
+    cout << x << ' ' << y << '\n';
 }
 
 int main() {
@@ -39,7 +47,7 @@ int main() {
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
     int Tcase = 1;
-    // cin >> Tcase; // scanf("%d", &Tcase);
+    cin >> Tcase; // scanf("%d", &Tcase);
     while (Tcase--) 
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";

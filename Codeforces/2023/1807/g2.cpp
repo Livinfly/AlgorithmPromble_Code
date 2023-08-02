@@ -13,22 +13,27 @@ typedef long long LL;
 typedef double db;
 typedef pair<int, int> PII;
 
+const int N = 2e5+10;
+
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    int n; cin >> n;
+    vector<int> a(n);
+    for(auto &x: a) cin >> x;
+    sort(all(a));
+    if(a[0] != 1) {
+        cout << "No\n";
+        return;
     }
+    LL sum = a[0];
+    // ori: [1, sum], x \in [1, sum] => new: [1, sum+x]
+    for(int i = 1; i < n; i ++) {
+        if(sum < a[i]) {
+            cout << "No\n";
+            return;
+        }
+        sum += a[i];
+    }
+    cout << "Yes\n";
 }
 
 int main() {
@@ -39,7 +44,7 @@ int main() {
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
     int Tcase = 1;
-    // cin >> Tcase; // scanf("%d", &Tcase);
+    cin >> Tcase; // scanf("%d", &Tcase);
     while (Tcase--) 
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";

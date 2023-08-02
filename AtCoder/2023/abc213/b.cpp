@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -10,25 +10,19 @@
 using namespace std;
 
 typedef long long LL;
-typedef double db;
 typedef pair<int, int> PII;
 
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    int n;
+    cin >> n;
+    vector<array<int, 2>> a(n);
+    for(int i = 0; i < n; i ++) {
+        auto &[x, id] = a[i];
+        cin >> x;
+        x = -x, id = i;
     }
+    sort(all(a));
+    cout << a[1][1]+1 << '\n';
 }
 
 int main() {
@@ -44,4 +38,4 @@ int main() {
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";
     return 0;
-}
+}   

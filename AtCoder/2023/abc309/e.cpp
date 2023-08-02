@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -10,25 +10,40 @@
 using namespace std;
 
 typedef long long LL;
-typedef double db;
 typedef pair<int, int> PII;
 
-void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+const int N = 3e5+10;
+
+int ans;
+vector<int> e[N];
+int tag[N];
+
+void dfs(int u) {
+    if(tag[u] >= 0) {
+        ans ++;
     }
+    for(auto v : e[u]) {
+        tag[v] = max(tag[v], tag[u]-1);
+        dfs(v);
+    }
+}
+void solve() {
+    memset(tag, -1, sizeof tag);
+    int n, m;
+    cin >> n >> m;
+    vector<int> p(n+1);
+    p[1] = 0;
+    for(int i = 2; i <= n; i ++) cin >> p[i];
+    while(m --) {
+        int a, b;
+        cin >> a >> b;
+        tag[a] = max(tag[a], b);
+    }
+    for(int i = 2; i <= n; i ++) {
+        e[p[i]].push_back(i);
+    }
+    dfs(1);
+    cout << ans << '\n';
 }
 
 int main() {

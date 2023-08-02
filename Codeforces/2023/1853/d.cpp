@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -10,24 +10,30 @@
 using namespace std;
 
 typedef long long LL;
-typedef double db;
 typedef pair<int, int> PII;
 
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    int n;
+    cin >> n;
+    vector<array<int, 2>> a(n);
+    for(int i = 0; i < n; i ++) {
+        auto &[x, id] = a[i];
+        cin >> x; id = i;
+    }
+    sort(all(a));
+    int l = 0, r = n-1, m = n;
+    vector<int> ans(n);
+    while(l <= r && ((a[l][0] == n-1-r) ^ (a[r][0] == n-l))) {
+        if(a[l][0] == n-1-r) ans[a[l++][1]] = -(m--);
+        else ans[a[r--][1]] = m--;
+    }
+    if(l == r+1) {
+        cout << "Yes\n";
+        for(auto x: ans) cout << x << ' ';
+        cout << '\n';
+    }
+    else {
+        cout << "No\n";
     }
 }
 
@@ -39,7 +45,7 @@ int main() {
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
     int Tcase = 1;
-    // cin >> Tcase; // scanf("%d", &Tcase);
+    cin >> Tcase; // scanf("%d", &Tcase);
     while (Tcase--) 
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";

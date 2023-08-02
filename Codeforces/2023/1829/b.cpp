@@ -14,21 +14,15 @@ typedef double db;
 typedef pair<int, int> PII;
 
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    int n, ans = 0, cnt = 0;
+    cin >> n;
+    for(int i = 0; i < n; i ++) {
+        int x; cin >> x;
+        if(x) ans = max(ans, cnt), cnt = 0;
+        else cnt++;
     }
+    ans = max(ans, cnt);
+    cout << ans << '\n';
 }
 
 int main() {
@@ -39,7 +33,7 @@ int main() {
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
     int Tcase = 1;
-    // cin >> Tcase; // scanf("%d", &Tcase);
+    cin >> Tcase; // scanf("%d", &Tcase);
     while (Tcase--) 
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";

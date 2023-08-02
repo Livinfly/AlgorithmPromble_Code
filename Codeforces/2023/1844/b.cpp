@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -10,25 +10,30 @@
 using namespace std;
 
 typedef long long LL;
-typedef double db;
 typedef pair<int, int> PII;
 
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    int n;
+    cin >> n;
+    if(n == 1) {
+        cout << "1\n";
+        return;
     }
+    if(n == 2) {
+        cout << "2 1\n";
+        return;
+    }
+    cout << 2 << ' ';
+    int t = n-3;
+    int lc = t/2, rc = t-lc;
+    for(int i = 0, x = 4; i < lc; i ++, x ++) {
+        cout << x << ' ';
+    }
+    cout << 1 << ' ';
+    for(int i = 0, x = 4+lc; i < rc; i ++, x ++) {
+        cout << x << ' ';
+    }
+    cout << 3 << '\n';
 }
 
 int main() {
@@ -39,7 +44,7 @@ int main() {
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
     int Tcase = 1;
-    // cin >> Tcase; // scanf("%d", &Tcase);
+    cin >> Tcase; // scanf("%d", &Tcase);
     while (Tcase--) 
         solve();
     // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";

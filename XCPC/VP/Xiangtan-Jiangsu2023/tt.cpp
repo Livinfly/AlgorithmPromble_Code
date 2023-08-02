@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -10,24 +10,36 @@
 using namespace std;
 
 typedef long long LL;
-typedef double db;
 typedef pair<int, int> PII;
 
+const int N = 1e6+10;
+
+int n, m;
+int a[N];
+
+int BinarySearch(int a[], int x) {
+	int l = 0, r = n;
+    
+    // 写法一：
+	while(l < r) {
+		int mid = l+r >> 1;
+		if(a[mid] < x) l = mid+1;
+		else r = mid;
+	}
+
+    // 写法二：
+    // r = lower_bound(a, a+n, x)-a;
+
+	if(a[r] != x) return -1;
+	return r+1;
+}
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    cin >> n >> m;
+    for(int i = 0; i < n; i ++) cin >> a[i];
+    while(m --) {
+    	int x;
+    	cin >> x;
+    	cout << BinarySearch(a, x) << ' ';
     }
 }
 

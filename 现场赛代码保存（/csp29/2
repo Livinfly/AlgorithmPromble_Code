@@ -1,0 +1,49 @@
+// luo jie
+#include <bits/stdc++.h>
+
+#define fi first
+#define se second
+#define all(a) (a).begin(), (a).end()
+#define mkp(x, y) make_pair((x), (y))
+
+using namespace std;
+
+typedef long long LL;
+typedef pair<int, int> PII;
+
+const int N = 1e5+10;
+
+LL n, m, k;
+PII a[N];
+
+bool check(int mid) {
+	LL sum = 0;
+	for(int i = 0; i < n; i ++) {
+		if(a[i].fi > mid) {
+			sum += ((LL)a[i].fi-mid)*a[i].se;
+			if(sum > m) return false;
+		}
+	}
+	return true;
+}
+
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cin >> n >> m >> k;
+	int mx = 0;
+	for(int i = 0; i < n; i ++) {
+		int x, y;
+		cin >> x >> y;
+		a[i] = {x, y};
+		mx = max(mx, x);
+	}
+	int l = k, r = mx;
+	while(l < r) {
+		int mid = l+r>>1;
+		if(check(mid)) r = mid;
+		else l = mid+1;
+	}
+	cout << r << '\n';
+	return 0;
+}

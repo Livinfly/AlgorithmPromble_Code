@@ -1,0 +1,111 @@
+// luo jie
+#include <bits/stdc++.h>
+
+#define fi first
+#define se second
+#define all(a) (a).begin(), (a).end()
+#define mkp(x, y) make_pair((x), (y))
+
+using namespace std;
+
+typedef long long LL;
+typedef pair<int, int> PII;
+
+const int N = 1e5+10, M = 5e4+10;
+
+struct Query {
+	int op, id;
+	string l, r, s;
+};
+
+int n, q;
+int a[N], st[N];
+map<string, int> mp;
+vector<Query> Q;
+vector<string> num;
+bool continued[N];
+
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+//	freopen("0.txt", "r", stdin);
+	cin >> n >> q;
+	while(q --) {
+		int op;
+		cin >> op;
+		if(op == 1) {
+			int id;
+			string l, r;
+			cin >> id >> l >> r;
+			num.push_back(l), num.push_back(r);
+			Q.push_back((Query){op, id, l, r, ""});
+		}
+		else if(op == 2) {
+			string s;
+			cin >> s;
+			num.push_back(s);
+			Q.push_back((Query){op, 0, "", "", s});
+		}
+		else {
+			string l, r;
+			cin >> l >> r;
+			num.push_back(l), num.push_back(r);
+			Q.push_back((Query){op, 0, l, r, ""});
+		}
+	}
+	sort(all(num));
+	num.erase(unique(all(num)), num.end());
+	int nn = num.size();
+	for(int i = 0; i < nn; i ++)
+		mp[num[i]] = i;
+//	for(int i = 0; i < nn; i ++)
+//		cout << num[i] << "  " << mp[num[i]] << '\n';
+	for(auto qq : Q) {
+		if(qq.op == 1) {
+			bool only = true, zero = false;
+			int ll = mp[qq.l], rr = mp[qq.r];
+			for(int i = ll; i <= rr; i ++) {
+				if(st[i] && st[i] != qq.id) 
+					only = false;
+				if(!st[i] || i < rr && !continued[i]) 
+					zero = true;
+			}
+			if(only && zero) {
+				cout << "YES\n";
+				for(int i = ll; i <= rr; i ++) 
+					st[i] = qq.id;
+				for(int i = ll; i < rr; i ++) 
+					continued[i] = true;
+				
+			}
+			else {
+				cout << "NO\n";
+			}
+		}
+		else if(qq.op == 2) {
+//			cout << "---------" << qq.s << ' ' << mp[qq.s] << '\n';
+			cout << st[mp[qq.s]] << '\n';
+		}
+		else {
+			int ll = mp[qq.l], rr = mp[qq.r];
+			int t = st[ll];
+			bool only = true;
+//			cout << "------------3----------\n";
+//			cout << mp[qq.l] << ' ' << mp[qq.r] << '\n';
+			for(int i = ll; i <= rr; i ++) {
+//				cout << st[i] << ' ';
+				if(st[i] != t || i < rr && !continued[i]) {
+					only = false;
+					break;
+				}
+			}
+//			cout << '\n';
+			if(!only) t = 0;
+			cout << t << '\n';
+		}
+//		for(int i = 0; i < nn; i ++)
+//			cout << i << " : st[" << i << "]  " << st[i] << '\n';
+	}
+	
+	return 0;
+}

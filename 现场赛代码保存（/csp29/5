@@ -1,0 +1,61 @@
+// luo jie
+#include <bits/stdc++.h>
+
+#define fi first
+#define se second
+#define all(a) (a).begin(), (a).end()
+#define mkp(x, y) make_pair((x), (y))
+
+using namespace std;
+
+typedef long long LL;
+typedef pair<int, int> PII;
+
+const int N = 2e5+10;
+
+int n, m;
+LL res;
+PII seg[N];
+
+bool Check(int l, int r) {
+//	cout << "--------------\n";
+//	cout << l << ' ' << r << '\n';
+	int p = -1;
+	for(int i = 0; i < m; i ++) {
+		if(seg[i].se == r && seg[i].fi >= l) {
+			p = i;
+			break;
+		}
+	}
+	if(!~p) return false;
+	int L = seg[p].fi;
+	for(int i = p; i >= 0; i --) {
+		if(seg[i].fi < l) return false;
+		if(seg[i].se >= L-1 && seg[i].se <= r) {
+			L = seg[i].fi;
+//			cout << L << ' ' << r << '\n';
+		}
+		if(L == l) return true;
+	}
+	return false;
+}
+
+int main() {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+//	freopen("0.txt", "r", stdin);
+	cin >> n >> m;
+	for(int i = 0; i < m; i ++) {
+		int a, b;
+		cin >> a >> b;
+		seg[i] = {a, b};
+	}
+	sort(seg, seg+m);
+	int res = 0;
+	for(int i = 1; i <= n; i ++)
+		for(int j = i+1; j <= n; j ++) {
+			if(Check(i, j)) res ++;
+		}
+	cout << res << '\n';
+	return 0;
+}

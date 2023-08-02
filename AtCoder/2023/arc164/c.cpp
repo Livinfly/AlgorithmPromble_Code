@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -10,25 +10,42 @@
 using namespace std;
 
 typedef long long LL;
-typedef double db;
 typedef pair<int, int> PII;
 
-void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+struct Rec {
+    LL x, y;
+    bool operator < (const Rec &rhs) const {
+        return y - x > rhs.y - rhs.x;
     }
+};
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<Rec> p(n);
+    priority_queue<Rec> heap;
+    for(auto &t : p) {
+        auto &[x, y] = t;
+        cin >> x >> y;
+        heap.push(t);
+    }
+    LL ans = 0;
+    bool cur = false;
+    
+    while(heap.size()) {
+        auto u = heap.top();
+        auto [x, y] = u;
+        heap.pop();
+        if(cur) {
+            ans += x;
+            // cerr << x << '\n';
+        }
+        else {
+            heap.push({y, x});
+        }
+        cur = !cur;
+    }
+    cout << ans << '\n';
 }
 
 int main() {

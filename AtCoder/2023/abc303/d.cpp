@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -10,25 +10,29 @@
 using namespace std;
 
 typedef long long LL;
-typedef double db;
 typedef pair<int, int> PII;
 
 void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+    const LL INF = 1e18;
+    LL x, y, z;
+    cin >> x >> y >> z;
+    string s;
+    cin >> s;
+    int n = s.size();
+    s = " " + s;
+    vector<array<LL, 2>> f(n+1, {INF, INF});
+    f[0][0] = 0, f[0][1] = z;
+    for(int i = 1; i <= n; i ++) {
+        if(s[i] == 'a') {
+            f[i][0] = min({f[i-1][0]+x, f[i-1][1]+z+x, f[i-1][1]+y+z});
+            f[i][1] = min({f[i-1][1]+y, f[i-1][0]+x+z, f[i-1][0]+z+y});
+        }
+        else {
+            f[i][1] = min({f[i-1][1]+x, f[i-1][0]+z+x, f[i-1][0]+y+z});
+            f[i][0] = min({f[i-1][0]+y, f[i-1][1]+x+z, f[i-1][1]+z+y});
+        }
     }
+    cout << min(f[n][0], f[n][1]) << '\n';
 }
 
 int main() {

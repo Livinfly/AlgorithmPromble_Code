@@ -1,4 +1,4 @@
-// #pragma GCC optimize(2)
+#pragma GCC optimize(2)
 
 #include <bits/stdc++.h>
 
@@ -10,31 +10,34 @@
 using namespace std;
 
 typedef long long LL;
-typedef double db;
 typedef pair<int, int> PII;
 
-void solve() {
-    bitset<100> b;
-    cout << 8*sizeof(b) << '\n';
-    vector<bool> a;
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.push_back(false);
-    cout << a.capacity() << '\n';
-    a.push_back(true);
-    cout << a.capacity() << '\n';
-    a.resize(100);
-    cout << a.capacity() << '\n';
-    for(int i = 0; i < a.size(); i ++) {
-        cout << a[i] << '\n';
+int A, B, P, Q;
+map<int, double> dp;
+
+double dfs(int x) {
+    if(dp.count(x)) return dp[x];
+    double ret = 0;
+    // cout << x << ' ' << ret << '\n';
+    if(x >= B) {
+        if(B > 1) {
+            ret = max(1 + 1.*P / 100. + dfs(x-B), 1 +  Q * dfs(x-B+1) / 100. + (100-Q) * dfs(x-B) / 100.);
+        }
+        else {  
+            ret = max(1 + 1.*P / 100. + dfs(x-B), 100./(100. - Q) + dfs(x-B));
+        }
     }
+    return dp[x] = ret;
+}
+void solve() {
+    cin >> A >> B >> P >> Q;
+    cout << dfs(A) << '\n';
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    cout << fixed;  // << setprecision(20); // double
+    cout << fixed << setprecision(20); // double
     // freopen("i.txt", "r", stdin);
     // freopen("o.txt", "w", stdout);
     // time_t t1 = clock();
