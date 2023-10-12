@@ -14,7 +14,11 @@ typedef double db;
 typedef pair<int, int> PII;
 
 void solve() {
-    
+    int n; cin >> n;
+    int ans = 6;
+    if(n <= 125) ans = 4;
+    else if(n >= 212) ans = 8;
+    cout << ans << '\n';
 }
 
 int main() {

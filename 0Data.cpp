@@ -23,12 +23,19 @@ int main() {
     cin.tie(0);
     cout << fixed;  // << setprecision(20); // double
     // freopen("i.txt", "r", stdin);
-    // freopen("o.txt", "w", stdout);
-    string tmp = "SRP";
-    int n = random(50000)+1, m = random(n)+1;
-    cout << n << ' ' << m << '\n';
-    for(int i = 0; i < n; i ++)
-        cout << tmp[random(3)];
-    cout << '\n';
+    freopen("o.txt", "w", stdout);
+    int n = 3, m = 4;
+    // cout << 100000 << '\n';
+    int tot = 1*2*3*4*5*6*7*8*9*10*11*12;
+    cout << tot << '\n';
+    vector<int> a(n*m);
+    int t = 0;
+    iota(all(a), 1);
+    next_permutation(all(a));
+    do {
+        cout << n << ' ' << m << '\n';
+        for(auto x: a) cout << x << ' ';
+        cout << endl;
+    } while(next_permutation(all(a)));
     return 0;
 }

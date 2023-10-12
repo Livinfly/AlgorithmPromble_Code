@@ -1,77 +1,52 @@
-#pragma GCC optimize(2)
-
-#include <bits/stdc++.h>
-
-#define fi first
-#define se second
-#define mkp(x, y) make_pair((x), (y))
-#define all(x) (x).begin(), (x).end()
-
+#include<bits/stdc++.h>
 using namespace std;
-
-typedef long long LL;
-typedef pair<int, int> PII;
-typedef pair<PII, int> PIII;
-
-const int N = 110;
-
-int n, m, f, p;
-PII prov;
-int g[N][N], tranf[N][N];
-vector<PIII> cons;
-bool st[4];
-
-void solve() {
-    cin >> n >> m >> f >> p;
-    cin >> prov.fi >> prov.se;
-    for(int i = 0; i < n; i ++)
-        for(int j = 0; j < n; j ++)
-            cin >> g[i][j];
-    for(int i = 0; i < m; i ++) {
-        int a, b, c;
-        cin >> a >> b >> c;
-        cons.push_back({{a, b}, c});
+const int N=1000005,M=998244353,E=1500;
+int n,m,a[N],e[35],t,k;
+map<int,int> mp;
+int main(){
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d %d",&n,&k);
+        mp.clear();
+        for(int i=1;i<=n;++i){
+            scanf("%d",&a[i]);
+            mp[k^a[i]]=1;
+        }
+        int fl=-1;
+        for(int i=1;i<=n;++i)
+            if(mp[a[i]]){
+                fl=1;
+                break;
+            }
+        if(fl==-1){
+            for(int i=1;i<=n;++i)
+                if(!mp[a[1]^a[i]]){
+                    fl=2;
+                    break;
+                }
+            if(fl==-1){
+                memset(e,0,sizeof(e));
+                int s=0;
+                sort(a+1,a+1+n);
+                n=unique(a+1,a+1+n)-a-1;
+                for(int i=1;i<=n;++i){
+                    int x=k^a[i];
+                    for(int j=29;j>=0;--j)
+                        if(x>>j&1)
+                            if(e[j])
+                                x^=e[j];
+                            else{
+                                e[j]=x;
+                                ++s;
+                                break;
+                            }
+                }
+                if((1<<s)!=n)
+                    fl=2;
+                else
+                    fl=0;
+            }
+        }
+        puts(fl==2?"Draw":(fl==1?"Alice":"Bob"));
     }
-    for(int i = 0; i < f; i ++) 
-        for(int j = 0; j < f; j ++)
-            cin >> tranf[i][j];
-    vector<int> ans;
-    for(int i = 0; i < m; i ++) {
-        if(cons[i].fi.fi == prov.fi && cons[i].fi.se < prov.se && !st[0]) {
-            ans.push_back(i);
-            st[0] = true;
-        }
-        else if(cons[i].fi.fi == prov.fi && cons[i].fi.se > prov.se && !st[1]) {
-            ans.push_back(i);
-            st[1] = true;
-        }
-        else if(cons[i].fi.se == prov.se && cons[i].fi.fi > prov.se && !st[2]) {
-            ans.push_back(i);
-            st[2] = true;
-        }
-        else if(cons[i].fi.se == prov.se && cons[i].fi.fi < prov.se && !st[3]) {
-            ans.push_back(i);
-            st[3] = true;
-        }
-    }
-    cout << 0 << '\n';
-    cout << prov.fi << ' ' << prov.se << ' ' << ans.size() << ' ';
-    for(int i = 0; i < ans.size(); i ++)
-        cout << 1 << ' ' << ans[i]+1 << ' ' << cons[ans[i]].se << ' ';
-    cout << '\n';
-}
-
-int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout << fixed;  // << setprecision(20); // double
-    // freopen("i.txt", "r", stdin);
-    // freopen("o.txt", "w", stdout);
-    // time_t t1 = clock();
-    // int Tcase;
-    // cin >> Tcase; // scanf("%d", &Tcase);
-    // while (Tcase--) 
-    solve();
-    // cout << "time: " << 1000.0 * ((clock() - t1) / CLOCKS_PER_SEC) << "ms\n";
-    return 0;
 }
