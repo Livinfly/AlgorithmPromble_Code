@@ -5,6 +5,7 @@
 #define fi first
 #define se second
 #define pb push_back
+#define eb emplace_back
 #define mkp(x, y) make_pair((x), (y))
 #define all(x) (x).begin(), (x).end()
 
@@ -15,15 +16,17 @@ typedef double db;
 typedef pair<int, int> PII;
 
 void solve() {
-    const int n = 1e8;
-    int f1 = 0, f2 = 1;
-    int res = 1;
-    for (int i = 1; i < n; i++) {
-        res = f1+f2;
-        f1 = f2;
-        f2 = res;
+    int a = 0, b = 0;
+    string s; cin >> s;
+    vector<PII> ve;
+    for(auto x: s) {
+        if(x == 'L') b--;
+        else if(x == 'R') b++;
+        else if(x == 'U') a--;
+        else a++;
+        ve.emplace_back
     }
-    cout << res << endl;
+
 }
 
 int main() {
